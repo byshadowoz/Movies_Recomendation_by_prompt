@@ -1,0 +1,25 @@
+-What is about this project?
+
+-What type of movies you're analizing?
+
+-What is the main goal of this project?
+
+-What are the movie with more budget in each year?
+
+-What are the movie with more revenue in each year?
+
+-How many movies are popular?
+
+-What do you do with missing data?
+
+-How many movies did make each movie companies?
+
+-What are the most popular movie companies?
+
+-Can you make it with a movie API to see the data in real time?
+
+-What is the most popular movie genre?
+
+-What is the most popular movie genre in each year?
+
+
