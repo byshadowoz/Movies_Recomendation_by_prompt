@@ -1,10 +1,10 @@
 -What is about this project?
 
--This Proyect is about Movie data Visualization and what kinds of insights could have analizing the data
+-This Proyect is about Movie data Visualization and what kinds of insights could have analizing the data.
 
 -What type of movies you're analizing?
 
-All types in specific but with a budget of more than 100000$
+All types in specific but with a budget of more than 100000$.
 
 -What is the main goal of this project?
 
