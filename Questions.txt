@@ -1,8 +1,16 @@
 -What is about this project?
 
+-This Proyect is about Movie data Visualization and what kinds of insights could have analizing the data
+
 -What type of movies you're analizing?
 
+All types in specific but with a budget of more than 100000$
+
 -What is the main goal of this project?
+
+To introduce movie data graphs and how they can be organized in a beautiful and efficient way. 
+
+<The nexts questions will be response in the processing.ipynb file>
 
 -What are the movie with more budget in each year?
 
