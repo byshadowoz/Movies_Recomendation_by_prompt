@@ -16,7 +16,7 @@ To introduce movie data graphs and how they can be organized in a beautiful and 
 
 -What are the movie with more revenue in each year? x
 
--How many movies are popular?
+-Who's the top 10 movies most popular in the time ?
 
 -How many movies did make each movie companies?
 
