@@ -16,7 +16,9 @@ To introduce movie data graphs and how they can be organized in a beautiful and 
 
 -What are the movie with more revenue in each year? x
 
--Who's the top 10 movies most popular in the time ?
+-Who's the top 10 movies most popular in the time ? x
+
+<The nexts questions will be response in the FeatureTransformations.ipynb file>
 
 -How many movies did make each movie companies?
 
