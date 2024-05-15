@@ -22,7 +22,7 @@ To introduce movie data graphs and how they can be organized in a beautiful and 
 
 -How many movies did make each movie companies? x
 
--What are the most popular movie companies?
+-What are the most popular movie in each companie?
 
 -What is the most popular movie genre?
 
