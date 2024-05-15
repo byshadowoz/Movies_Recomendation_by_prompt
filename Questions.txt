@@ -1,32 +1,32 @@
--What is about this project?
+1-What is about this project?
 
--This Proyect is about Movie data Visualization and what kinds of insights could have analizing the data.
+This Proyect is about Movie data Visualization and what kinds of insights could have analizing the data.
 
--What type of movies you're analizing?
+2-What type of movies you're analizing?
 
 All types in specific but with a budget of more than 100000$.
 
--What is the main goal of this project?
+3-What is the main goal of this project?
 
 To introduce movie data graphs and how they can be organized in a beautiful and efficient way. 
 
 <The nexts questions will be response in the processing.ipynb file>
 
--What are the movie with more budget in each year? x
+4-What are the movie with more budget in each year? x
 
--What are the movie with more revenue in each year? x
+5-What are the movie with more revenue in each year? x
 
--Who's the top 10 movies most popular in the time ? x
+6-Who's the top 10 movies most popular in the time ? x
 
 <The nexts questions will be response in the FeatureTransformations.ipynb file>
 
--How many movies did make each movie companies? x
+7-How many movies did make each movie companies? x
 
--What are the most popular movie in each companie?
+8-What are the most popular movie in each companie? x
 
--What is the most popular movie genre?
+9-What is the most popular movie genre? 
 
--What is the most popular movie genre in each year?
+10-What is the most popular movie genre in each year?
 
--Can you make it with a movie API?
+11-Can you make it with a movie API?
 
