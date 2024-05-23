@@ -24,9 +24,9 @@ To introduce movie data graphs and how they can be organized in a beautiful and 
 
 8-What are the most popular movie in each companie? x
 
-9-What is the most popular movie genre? 
+9-What is the most popular movie genre? x
 
-10-What is the most popular movie genre in each year?
+10-What is the most popular movie genre in each year? x
 
 11-Can you make it with a movie API?
 
