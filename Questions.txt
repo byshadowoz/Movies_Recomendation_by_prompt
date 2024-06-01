@@ -28,5 +28,7 @@ To introduce movie data graphs and how they can be organized in a beautiful and 
 
 10-What is the most popular movie genre in each year? x
 
-11-Can you make it with a movie API?
+11- Create an AI model that recommends movies based on their favorite genres, favorite actors, whether they are popular or niche, and whether they are recent or old.
+
+12-Can you make it with a movie API?
 
