@@ -3,14 +3,11 @@ import os
 
 url = "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1"
 
-if 'TMDB_API_KEY' in os.environ:
-    api_key = os.environ['TMDB_API_KEY']
-else:
-    api_key = secrets.token_hex(32)
+api_key = os.environ['TMDB_API_KEY']
 
 headers = {
     "accept": "application/json",
-    "Authorization": "Bearer {api_key}"
+    "Authorization": f"Bearer {api_key}"
 }
 
 response = requests.get(url, headers=headers)
