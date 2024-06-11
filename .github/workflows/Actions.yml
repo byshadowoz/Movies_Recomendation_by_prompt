@@ -37,4 +37,4 @@ jobs:
        # API KEY   
       - name: Obtain API key of GitHub Actions
         run: |
-          echo "API key of TMDB: ${{secrets.TMDB_API_KEY}}
+          echo "API key of TMDB: ${{secrets.TMDB_API_KEY}}"
