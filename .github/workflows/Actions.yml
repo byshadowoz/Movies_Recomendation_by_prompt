@@ -34,6 +34,7 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+       # API KEY   
       - name: Obtain API key of GitHub Actions
         run: |
-          echo "API key of TMDB: $TMDB_API_KEY"
+          echo "API key of TMDB: ${{secrets.TMDB_API_KEY}}
