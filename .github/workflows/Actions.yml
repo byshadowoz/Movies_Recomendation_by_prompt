@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 env:
-    API_KEY: ${{secrets.TMDB_API_KEY}}
+  TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
   
 
 jobs:

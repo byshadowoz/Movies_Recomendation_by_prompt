@@ -3,8 +3,8 @@ import os
 
 url = "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1"
 
-api_key = os.environ['API_KEY']
-
+api_key = os.getenv("TMDB_API_KEY")
+print(api_key)
 headers = {
     "accept": "application/json",
     "Authorization": f"Bearer {api_key}"
