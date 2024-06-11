@@ -36,4 +36,4 @@ jobs:
           echo test, and deploy your project.
       - name: Obtain API key of GitHub Actions
         run: |
-          echo "API key de TMDB: $TMDB_API_KEY"
+          echo "API key of TMDB: $TMDB_API_KEY"
