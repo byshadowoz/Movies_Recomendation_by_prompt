@@ -1,5 +1,4 @@
 import requests
-from keys import API_KEY
 
 
 
@@ -7,7 +6,7 @@ url = "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_v
 
 headers = {
     "accept": "application/json",
-    "Authorization": f"Bearer {API_KEY}"
+    "Authorization": "Bearer {API_KEY}"
 }
 
 response = requests.get(url, headers=headers)
