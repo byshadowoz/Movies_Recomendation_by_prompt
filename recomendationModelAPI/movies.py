@@ -1,17 +1,10 @@
 import requests
-import os
 
 url = "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1"
-api_key = ''
-
-api_key = os.environ.get('TMDB_API_KEY')
-if api_key is None:
-    print("Error: API_KEY environment variable not found")
-print(api_key)
 
 headers = {
     "accept": "application/json",
-    "Authorization": f"Bearer {api_key}"
+    "Authorization": f"Bearer"
 }
 
 response = requests.get(url, headers=headers)
