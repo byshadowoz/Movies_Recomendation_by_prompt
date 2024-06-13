@@ -1,15 +1,15 @@
 import requests
+import dotenv
+import os 
 
-
+dotenv.load_dotenv()
 
 url = "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1"
 
 headers = {
     "accept": "application/json",
-    "Authorization": "Bearer {API_KEY}"
+    "Authorization": f"Bearer {os.environ.get('api_rat')}"
 }
-
-response = requests.get(url, headers=headers)
 
 def movies_id(res):# return all the movies in the page in a dictionary where key = id and value = title
     try:
@@ -39,7 +39,14 @@ def change_page(response, url):
         return response.json()
     else:
         print('error, page does not exist')
-        
-    
 
-change_page(response,url)
+def main_test():
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        movies_dict = movies_id(response)
+        new_response = change_page(response, url)
+        print(new_response, movies_dict)
+    else:
+        print('error, could not fetch data')
+main_test()
