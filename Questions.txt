@@ -18,8 +18,6 @@ To introduce movie data graphs and how they can be organized in a beautiful and 
 
 6-Who's the top 10 movies most popular in the time ? x
 
-<The nexts questions will be response in the FeatureTransformations.ipynb file>
-
 7-How many movies did make each movie companies? x
 
 8-What are the most popular movie in each companie? x
@@ -28,7 +26,5 @@ To introduce movie data graphs and how they can be organized in a beautiful and 
 
 10-What is the most popular movie genre in each year? x
 
-11- Create an AI model that recommends movies based on their favorite genres, favorite actors, whether they are popular or niche, and whether they are recent or old.
-
-12-Can you make it with a movie API?
+11- Create an AI model that recommends movies based on their favorite genres, favorite actors, whether they are popular or niche, and whether they are recent or old. can you make it with a movie API?
 
