@@ -1,5 +1,6 @@
 import requests
 import movies
+import pandas as pd
 
 url = "https://api.themoviedb.org/3/genre/movie/list?language=en"
 
@@ -7,12 +8,12 @@ headers = movies.headers
 
 response = requests.get(url, headers=headers)
 
-genresGlobal = {}
+if response.status_code == 200:
+    data = response.json()
+    genresGlobal = {}
+    genres = data['genres']
+    for genre in genres:
+        genresGlobal[genre['id']] = genre['name']
 
-def genreCollection():
-    if response.status_code == 200:
-        data = response.json()
-        genres = data['genres']
-        for genre in genres:
-            genresGlobal[genre['id']] = genre['name']
-        return genresGlobal
+def genresMovie(movies):
+    pass    

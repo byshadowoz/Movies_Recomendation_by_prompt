@@ -9,21 +9,23 @@ headers = {
     "Authorization": f"Bearer {os.environ.get('api_rat') or '<YOUR ACCESS TOKEN>'}"
 }
 
-def movies_id():# return all the movies in the page in a dictionary where key = id and value = title
+def movies_title():# return all the movies in the page in a dictionary where key = id and value = title
     try:
         response = change_page()
         movies_dict = {}
         data = response.json()
         movies = data['results']
         for movie in movies:
-            movies_dict[movie['id']] = movie
+            movies_dict[movie['title'].title()] = {'id': movie['id']}
         return movies_dict
     
     except Exception as e:
         print(f"An error occurred: {e}")
         print(f'response status code: {response.status_code}')
 
+
 def change_page():
+    global num
     num = int(input('select page => '))
     if num < 1:
         num = 1
@@ -32,7 +34,7 @@ def change_page():
 
 def main_test():
     try:
-        movies_dict = movies_id()
+        movies_dict = movies_title()
         print(movies_dict)
     except Exception as e:
         print('error, could not fetch data')
