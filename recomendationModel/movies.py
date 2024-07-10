@@ -23,6 +23,14 @@ def movies_title():# return all the movies in the page in a dictionary where key
         print(f"An error occurred: {e}")
         print(f'response status code: {response.status_code}')
 
+def searchMovie(movie_id):
+    try:
+        url = f"https://api.themoviedb.org/3/movie/{movie_id}?language=en-US"
+        response = requests.get(url, headers=headers)
+        return response.json()
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        print(f'response status code: {response.status_code}')
 
 def change_page():
     global num

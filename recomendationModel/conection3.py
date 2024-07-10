@@ -73,8 +73,6 @@ class createUser:
                 time.sleep(0.3)
                 print('done')
 
-user1 = createUser('loco', '12345', 'elloco@gmail.com')
-user1.addfavoriteMovies()
 # add user to db
 def addUser(user):
     cursor.execute(f"SELECT COUNT(*) FROM user WHERE email = ?", (user.email,))
@@ -97,8 +95,16 @@ def addFavMovies(user):
         row_id = generate_id()
         cursor.execute(f"INSERT INTO favorite_movies (id, user_id, movie_id) VALUES (?, ?, ?)", (row_id, user.id, user.favoriteMovies[i]))
         database.commit()
-addUser(user1)
-addFavMovies(user1)
-    
 
+# verify if movie id return the correct movie:
+def allUserMovies(name, password, gmail):
+    cursor.execute(f"SELECT name, movie_id FROM user LEFT JOIN favorite_movies as fav_mov ON user.id = fav_mov.user_id WHERE name = ? AND password = ? AND email = ?", (name, password, gmail))
+    user = cursor.fetchone()
+    if user is None:
+        print('user not found')
+        return
+    movie = movies.searchMovie(user[1])
+    return movie
+
+print(allUserMovies('loco', 12345, 'elloco@gmail.com'))
 database.close()
