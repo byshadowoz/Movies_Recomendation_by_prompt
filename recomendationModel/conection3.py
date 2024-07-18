@@ -3,6 +3,7 @@ import movies
 import os
 import uuid
 import time
+import model
 
 #create the database
 database = sqlite3.connect('database/usersAndMovies')
@@ -11,8 +12,8 @@ cursor = database.cursor()
 def createTables():
     query = """CREATE TABLE IF NOT EXISTS user (
         id VARCHAR(255) PRIMARY KEY,
-        name VARCHAR(25) NOT NULL,
-        password VARCHAR(45) NOT NULL,
+        name VARCHAR(255) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL,
         email VARCHAR(255) UNIQUE NOT NULL);
 
         CREATE TABLE IF NOT EXISTS favorite_movies (
@@ -24,7 +25,7 @@ def createTables():
         id VARCHAR(255) PRIMARY KEY,
         user_id VARCHAR(255) NOT NULL,
         movie_id VARCHAR(255) NOT NULL,
-        rating INT NOT NULL)
+        rating DECIMAL NOT NULL);
         """
     cursor.executescript(query)
 
@@ -33,78 +34,170 @@ createTables()
 
 def generate_id():
     return str(uuid.uuid4())
-
-#create a user with a class
-class createUser:
-    def __init__(self, name, password, email=None):
-        self.name = name
-        self.password = password
-        self.email = email
-        self.id = generate_id()
-        self.favoriteMovies = []
-        self.wachedMovies = {}
-    
-    def addfavoriteMovies(self):
-        moviesDict = movies.movies_title()
-        print(f'Movies: {moviesDict}')
-        print(f'Select your favorite movie by entering the movie name')
-
-        favMovie = str(input('Write the movie name ')).title()
-        try:
-            if favMovie in moviesDict:
-                self.favoriteMovies.append(moviesDict[favMovie]['id'])
-                print(f'You have added {favMovie} to your favorite movies')
-            else:
-                print('Movie not found, try another page')
-            print('add another movie? [Y/N]')
-            choice = input("=>").lower()
-            if choice == 'y':
-                self.addfavoriteMovies()
-            else:
-                print('adding movies to Database...')
-                time.sleep(1)
-                print('Done')
-        except Exception as e:
-            print(f"error {e} has ocurred want to try again?[Y/N]")
-            choice = input("=>").lower()
-            if choice == 'y':
-                self.addfavoriteMovies()
-            else:
-                time.sleep(0.3)
-                print('done')
+idx = str(generate_id())
+#create a user
 
 # add user to db
-def addUser(user):
-    cursor.execute(f"SELECT COUNT(*) FROM user WHERE email = ?", (user.email,))
+def addUser(username, email, password):
+    cursor.execute(f"SELECT COUNT(*) FROM user WHERE email = ?",
+                    (email,))
     userexistence = cursor.fetchone()[0]
-
     if userexistence > 0:
         print('email already used')
         return
-    cursor.execute(f"INSERT INTO user (id, name, password, email) VALUES (?, ?, ?, ?)", (user.id, user.name, user.password, user.email))
+    
+    cursor.execute(f"SELECT COUNT(*) FROM user WHERE name = ?",
+                    (username,))
+    userexistence = cursor.fetchone()[0]
+    if userexistence > 0:
+        print('username already used')
+        return
+    
+    cursor.execute(f"INSERT INTO user (id, name, password, email) VALUES (?, ?, ?, ?)",
+                    (idx, username, password, email))
     database.commit()
     print('user created succesful')
 
-def addFavMovies(user):
-    for i in (range(0, len(user.favoriteMovies))):
-        cursor.execute(f"SELECT COUNT(*) FROM favorite_movies WHERE user_id = ? AND  movie_id = ?", (user.id, user.favoriteMovies[i]))
-        relationexistence = cursor.fetchone()[0]
-        if relationexistence > 0:
-            print(f'movie with id {user.favoriteMovies[i]} already added')
-            return 
-        row_id = generate_id()
-        cursor.execute(f"INSERT INTO favorite_movies (id, user_id, movie_id) VALUES (?, ?, ?)", (row_id, user.id, user.favoriteMovies[i]))
-        database.commit()
-
-# verify if movie id return the correct movie:
-def allUserMovies(name, password, gmail):
-    cursor.execute(f"SELECT name, movie_id FROM user LEFT JOIN favorite_movies as fav_mov ON user.id = fav_mov.user_id WHERE name = ? AND password = ? AND email = ?", (name, password, gmail))
-    user = cursor.fetchone()
-    if user is None:
+def addfavoriteMovies(username, password):
+    # check if user exist
+    cursor.execute(f"SELECT COUNT(*) FROM user WHERE  name = ? AND  password = ?", (username, password))
+    userexistence = cursor.fetchone()[0]
+    if userexistence == 0:
         print('user not found')
         return
-    movie = movies.searchMovie(user[1])
-    return movie
+    
+    favoriteMovies = []  
+    moviesDict = movies.movies_title()
+    print(f'Movies: {moviesDict}')
+    print(f'Select your favorite movie by entering the movie name')
 
-print(allUserMovies('loco', 12345, 'elloco@gmail.com'))
+    favMovie = str(input('Write the movie name ')).title()
+    try:
+        if favMovie in moviesDict:
+            favoriteMovies.append(moviesDict[favMovie]['id'])
+            print(f'You have added {favMovie} to your favorite movies')
+        else:
+            print('Movie not found, try another page')
+        print('add another movie? [Y/N]')
+        choice = input("=>").lower()
+        if choice == 'y':
+            addfavoriteMovies(username, password)
+        else:
+            print('adding movies to Database...')
+            time.sleep(1)
+
+            print('Done')
+    except Exception as e:
+        print(f"error {e} has ocurred want to try again?[Y/N]")
+        choice = input("=>").lower()
+        if choice == 'y':
+            addfavoriteMovies(username, password)
+        else:
+            time.sleep(0.3)
+            print('done')
+    _addFavMoviesToDb(username, password, favoriteMovies)
+
+def _addFavMoviesToDb(username, password, favoriteMovies):
+    # check if favoriteMovies is empty
+    if len(favoriteMovies) < 1:
+        print('no favorite movies')
+        return
+    # search user_id
+    cursor.execute(f"SELECT id FROM user WHERE  name = ? AND  password = ?", (username, password))
+    user_id = cursor.fetchone()[0]
+    for i in (range(0, len(favoriteMovies))):
+        cursor.execute(f"SELECT COUNT(*) FROM favorite_movies WHERE user_id = ? AND  movie_id = ?",
+                        (user_id, favoriteMovies[i]))
+        relationexistence = cursor.fetchone()[0]
+        if relationexistence > 0:
+            print(f'movie with id {favoriteMovies[i]} already added')
+            return 
+        row_id = generate_id()
+        cursor.execute(f"INSERT INTO favorite_movies (id, user_id, movie_id) VALUES (?, ?, ?)",
+                        (row_id, user_id, favoriteMovies[i]))
+        database.commit()
+
+def allUserMovies(name, password):
+    cursor.execute(f"SELECT movie_id FROM user LEFT JOIN favorite_movies as fav_mov ON user.id = fav_mov.user_id WHERE name = ? AND password = ?",
+                    (name, password))
+    user = cursor.fetchall()
+    if user is None:
+        print('user not found, try check if the username or the password is correct')
+        return
+    moviesTable = []
+    print('see favorite movies or wached Movies?  [F/W]')
+    global dbTable 
+    dbTable = input("=>").lower()
+    if dbTable == 'f':
+        print('favorite movies:')
+        for movie_id in user:
+            moviesTable.append(movies.searchMovie(movie_id[0]))
+        return moviesTable
+    elif dbTable == 'w':
+        cursor.execute(f"SELECT movie_id FROM user LEFT JOIN wached_movies as whcd_mov ON user.id = whcd_mov.user_id WHERE name = ? AND password = ?",
+                        (name, password))
+        user = cursor.fetchall()    
+        if user is None:
+            print('user not found')
+            return
+        print('wached movies:')
+        for movie_id in user:
+            moviesTable.append(movies.searchMovie(movie_id[0]))
+        return moviesTable
+    else:
+        print('invalid choice')
+        return
+        
+    
+# add wached movies
+def addWachedMovies(username, password):
+    cursor.execute(f"SELECT COUNT(*) FROM user WHERE  name = ? AND  password = ?", (username, password))
+    userexistence = cursor.fetchone()[0]
+    if userexistence == 0:
+        print('user not found')
+        return
+    
+    moviesDict = movies.movies_title()
+
+    cursor.execute(f"SELECT id FROM user WHERE  name = ? AND  password = ?", (username, password))
+    user_id = cursor.fetchone()[0]
+
+    print(f'Movies: {moviesDict}')
+    print(f'Select the wached movie by entering the movie name')
+
+    wachedMovie = str(input('Write the movie name ')).title()
+    try:
+        if wachedMovie in moviesDict:
+            ratingg = None
+            while ratingg is None:
+                ratingg = int(input('Write the rating of the movie [1/10] '))
+                if ratingg < 1 or ratingg > 10:
+                    print('The rating must be between 1 and 10')
+                    ratingg = None
+
+            cursor.execute(f"INSERT INTO wached_movies (id, user_id, movie_id, rating) VALUES (?, ?, ?, ?)",
+                            (generate_id(), user_id, moviesDict[wachedMovie]['id'], ratingg))
+            database.commit()
+            print(f"You rated the movie {ratingg} out of 10.")
+            print('add another movie? [Y/N]')
+            if str(input()).lower() == 'y':
+                addWachedMovies(username, password)
+            else:
+                return
+        else:
+            print('movie not found, try again')
+            addWachedMovies(username, password)
+    except Exception as e:
+        print(f'error: {e} has ocurred want try again? [Y/N]?')
+        if str(input('-> ')).lower() == 'y':
+            addWachedMovies(username, password)
+        else:
+            return
+
+test = allUserMovies('Test1', 'test1')
+
+for movie in test:
+    print(model.checkMovieGenre(movie, dbTable))
+
+
 database.close()
