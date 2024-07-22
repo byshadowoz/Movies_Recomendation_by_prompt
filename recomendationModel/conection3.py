@@ -149,8 +149,7 @@ def allUserMovies(name, password):
         return
         
     
-# add wached movies
-def addWachedMovies(username, password):
+
     cursor.execute(f"SELECT COUNT(*) FROM user WHERE  name = ? AND  password = ?", (username, password))
     userexistence = cursor.fetchone()[0]
     if userexistence == 0:
@@ -193,11 +192,9 @@ def addWachedMovies(username, password):
             addWachedMovies(username, password)
         else:
             return
+        
 
-test = allUserMovies('Test1', 'test1')
 
-for movie in test:
-    print(model.checkMovieGenre(movie, dbTable))
 
 
 database.close()

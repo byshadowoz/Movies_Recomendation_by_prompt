@@ -26,6 +26,7 @@ genresTable = genresForMovies()
 
 def checkMovieGenre(movie, dbTable):
     genres = [genMovie['name'] for genMovie in movie['genres']]
+    print(genres)
     for i in genres:
         for index, row in genresTable.iterrows():
             if row['genre'] == i:
