@@ -2,5 +2,5 @@ archive.zip
 movie_dataset.csv
 recomendationModel/proofs.ipynb
 
-recomendationModel/.env
-*.pyc
+.env
+__pychache__
