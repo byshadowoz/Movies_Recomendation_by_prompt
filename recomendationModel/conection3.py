@@ -1,9 +1,7 @@
 import sqlite3
-import movies
-import os
+import movies as mvs
 import uuid
 import time
-import model
 
 #create the database
 database = sqlite3.connect('database/usersAndMovies')
@@ -67,7 +65,7 @@ def addfavoriteMovies(username, password):
         return
     
     favoriteMovies = []  
-    moviesDict = movies.movies_title()
+    moviesDict = mvs.movies_title()
     print(f'Movies: {moviesDict}')
     print(f'Select your favorite movie by entering the movie name')
 
@@ -117,7 +115,7 @@ def _addFavMoviesToDb(username, password, favoriteMovies):
                         (row_id, user_id, favoriteMovies[i]))
         database.commit()
 
-def allUserMovies(name, password):
+def allUserMovies(name, password, dbTable):
     cursor.execute(f"SELECT movie_id FROM user LEFT JOIN favorite_movies as fav_mov ON user.id = fav_mov.user_id WHERE name = ? AND password = ?",
                     (name, password))
     user = cursor.fetchall()
@@ -125,14 +123,11 @@ def allUserMovies(name, password):
         print('user not found, try check if the username or the password is correct')
         return
     moviesTable = []
-    print('see favorite movies or wached Movies?  [F/W]')
-    global dbTable 
-    dbTable = input("=>").lower()
     if dbTable == 'f':
-        print('favorite movies:')
         for movie_id in user:
-            moviesTable.append(movies.searchMovie(movie_id[0]))
-        return moviesTable
+            moviesTable.append(mvs.searchMovie(movie_id[0]))
+        movies = moviesTable
+        return movies
     elif dbTable == 'w':
         cursor.execute(f"SELECT movie_id FROM user LEFT JOIN wached_movies as whcd_mov ON user.id = whcd_mov.user_id WHERE name = ? AND password = ?",
                         (name, password))
@@ -140,23 +135,23 @@ def allUserMovies(name, password):
         if user is None:
             print('user not found')
             return
-        print('wached movies:')
         for movie_id in user:
-            moviesTable.append(movies.searchMovie(movie_id[0]))
-        return moviesTable
+            moviesTable.append(mvs.searchMovie(movie_id[0]))
+        movies = moviesTable
+        return movies
     else:
         print('invalid choice')
         return
         
     
-
+def addWachedMovies(username, password):
     cursor.execute(f"SELECT COUNT(*) FROM user WHERE  name = ? AND  password = ?", (username, password))
     userexistence = cursor.fetchone()[0]
     if userexistence == 0:
         print('user not found')
         return
     
-    moviesDict = movies.movies_title()
+    moviesDict = mvs.movies_title()
 
     cursor.execute(f"SELECT id FROM user WHERE  name = ? AND  password = ?", (username, password))
     user_id = cursor.fetchone()[0]
@@ -192,9 +187,3 @@ def allUserMovies(name, password):
             addWachedMovies(username, password)
         else:
             return
-        
-
-
-
-
-database.close()
