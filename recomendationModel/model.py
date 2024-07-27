@@ -7,7 +7,8 @@ import conection3 as cn3
 from math import sqrt
 import numpy as np
 csv_path = 'allmovies.csv'
-dataF = pd.read_csv(csv_path)
+dataM = pd.read_csv(csv_path,)
+dataM.drop(columns='genre_ids', inplace=True)
 
 database = sqlite3.connect('database/usersAndMovies')
 cursor = database.cursor()
@@ -16,50 +17,31 @@ url = "https://api.themoviedb.org/3/genre/movie/list?language=en"
 response = requests.get(url, headers=movies.headers)
 data = response.json()
 
-def genresForMovies():
-    genresMovie = {'genres': [],
-                'rating': []}
+def modelRecomV1(usrnm, pswrd, dbtable):
+    if dbtable.lower() == 'f':
+        cursor.execute("SELECT movie_id FROM favorite_movies LEFT JOIN user ON user.id = favorite_movies.user_id WHERE name = ? AND password = ?",
+                       (usrnm, pswrd))
+        userMovies = cursor.fetchall()
+        userData = [{'id':int(movie_id[0]), 'rating': 10} for movie_id in userMovies]
+        
+
+    elif dbtable.lower() == 'w':
+        cursor.execute("SELECT movie_id, rating FROM wached_movies LEFT JOIN user ON user.id = wached_movies.user_id WHERE name = ? AND password = ?",
+                       (usrnm, pswrd))
+        userMovies = cursor.fetchall()
+        userData = [{'id':int(movie_id[0]), 'rating': movie_id[1]} for movie_id in userMovies]
     
-    for gen in data['genres']:
-
-        genresMovie['genres'].append(gen['name'])
-        genresMovie['rating'].append(int(gen['id']) * 0)
-
-    genres = pd.DataFrame(genresMovie)
-    return genres
-
-genresTable = genresForMovies()
-
-def movieToDf(movies):
-    def genre_names(genre_list):
-        return [genre['name'] for genre in genre_list]
-    for movie in movies:
-        movie['genres'] = genre_names(movie['genres'])
-
-    moviesData = pd.DataFrame(movies)
-    moviesData = moviesData.drop(columns=['backdrop_path', 'poster_path', 'tagline', 'homepage', 'imdb_id', 'original_language',
-                                           'overview', 'production_countries', 'spoken_languages', 'status', 'production_companies','belongs_to_collection' ])
-    
-    print(moviesData.head())
-
-    for index, row in dataF.iterrows():
-        for genre in row['genre_ids']:
-            moviesData.at[index, genre] = 1
-    moviesData = moviesData.fillna(0)
-    moviesData.to_csv('example.csv')
-    return moviesData
-
-allusermovies = cn3.allUserMovies('Test1', 'test1', dbTable='f')
-print(movieToDf(allusermovies))
-
-def checkMovieGenre(movie, dbTable):
-    genres = [genMovie['name'] for genMovie in movie['genres']]
-    for genre in genres:
-
-        for index, row in genresTable.iterrows():
-            if row['genres'] == genre:
-                if dbTable.lower() == 'f':
-                    genresTable.loc[index, 'rating'] += 10
-                else:
-                    genresTable.loc[index, 'rating'] += float(cursor.execute("SELECT rating FROM wached_movies WHERE movie_id = ?", (movie['id'],)).fetchone()[0])
-    return genresTable
+    inputMovie = pd.DataFrame(userData)
+    Id = dataM[dataM['id'].isin(inputMovie['id'].tolist())]
+    inputMovie = pd.merge(Id, inputMovie)
+    inputMovie = inputMovie.drop(columns=['vote_average', 'vote_count', 'original_language','original_title'])
+    inputMovie = inputMovie.reset_index(drop=True)
+    genreTable = inputMovie.drop(columns=['title','adult','popularity','rating','id'])
+    profile_user = genreTable.transpose().dot(inputMovie['rating'])
+    genre = dataM.set_index(dataM['id'])
+    genre = genre.drop(columns=['id','vote_average', 'vote_count', 'original_title','title','adult', 'popularity'])
+    recom = ((genre*profile_user).sum(axis=1)) / (profile_user.sum())
+    final = dataM.loc[dataM['id'].isin(recom.head(20).keys())]
+    nfinal = final[['title']]
+    return nfinal
+print(modelRecomV1('byshadowoz', 'Togo2025$$', 'w'))
