@@ -126,8 +126,8 @@ def allUserMovies(name, password, dbTable):
     if dbTable == 'f':
         for movie_id in user:
             moviesTable.append(mvs.searchMovie(movie_id[0]))
-        movies = moviesTable
-        return movies
+        moviesTable
+        return moviesTable
     elif dbTable == 'w':
         cursor.execute(f"SELECT movie_id FROM user LEFT JOIN wached_movies as whcd_mov ON user.id = whcd_mov.user_id WHERE name = ? AND password = ?",
                         (name, password))
@@ -137,8 +137,8 @@ def allUserMovies(name, password, dbTable):
             return
         for movie_id in user:
             moviesTable.append(mvs.searchMovie(movie_id[0]))
-        movies = moviesTable
-        return movies
+        moviesTable
+        return moviesTable
     else:
         print('invalid choice')
         return
