@@ -2,10 +2,6 @@ import movies
 import pandas as pd
 import requests 
 import sqlite3
-import os
-import conection3 as cn3
-from math import sqrt
-import numpy as np
 csv_path = 'allmovies.csv'
 dataM = pd.read_csv(csv_path,)
 dataM.drop(columns='genre_ids', inplace=True)
@@ -41,7 +37,6 @@ def modelRecomV1(usrnm, pswrd, dbtable):
     genre = dataM.set_index(dataM['id'])
     genre = genre.drop(columns=['id','vote_average', 'vote_count', 'original_title','title','adult', 'popularity'])
     recom = ((genre*profile_user).sum(axis=1)) / (profile_user.sum())
-    final = dataM.loc[dataM['id'].isin(recom.head(20).keys())]
+    final = dataM.loc[dataM['id'].isin(recom.head().keys())]
     nfinal = final[['title']]
     return nfinal
-print(modelRecomV1('byshadowoz', 'Togo2025$$', 'w'))

@@ -2,6 +2,8 @@ import sqlite3
 import movies as mvs
 import uuid
 import time
+from model import modelRecomV1 as ml
+import cryptpsswrd
 
 #create the database
 database = sqlite3.connect('database/usersAndMovies')
@@ -51,17 +53,28 @@ def addUser(username, email, password):
         print('username already used')
         return
     
+    
+    
     cursor.execute(f"INSERT INTO user (id, name, password, email) VALUES (?, ?, ?, ?)",
-                    (idx, username, password, email))
+                    (idx, username, cryptpsswrd.encryptPassword(password), email))
     database.commit()
     print('user created succesful')
 
+
+
 def addfavoriteMovies(username, password):
     # check if user exist
-    cursor.execute(f"SELECT COUNT(*) FROM user WHERE  name = ? AND  password = ?", (username, password))
+    cursor.execute(f"SELECT COUNT(*) FROM user WHERE  name = ?", (username,))
     userexistence = cursor.fetchone()[0]
     if userexistence == 0:
         print('user not found')
+        return
+    encrptPwd = cursor.execute('SELECT password FROM user WHERE name = ?', (username,))
+    encrptPwd = cursor.fetchone()[0]
+    if cryptpsswrd.uncryptPassword(password, encrptPwd) == True:
+        print('password correct')
+    else:
+        print('password incorrect')
         return
     
     favoriteMovies = []  
@@ -93,15 +106,15 @@ def addfavoriteMovies(username, password):
         else:
             time.sleep(0.3)
             print('done')
-    _addFavMoviesToDb(username, password, favoriteMovies)
+    _addFavMoviesToDb(username, encrptPwd, favoriteMovies)
 
-def _addFavMoviesToDb(username, password, favoriteMovies):
+def _addFavMoviesToDb(username, encryptpassword, favoriteMovies):
     # check if favoriteMovies is empty
     if len(favoriteMovies) < 1:
         print('no favorite movies')
         return
     # search user_id
-    cursor.execute(f"SELECT id FROM user WHERE  name = ? AND  password = ?", (username, password))
+    cursor.execute(f"SELECT id FROM user WHERE  name = ?, password = ?", (username, encryptpassword))
     user_id = cursor.fetchone()[0]
     for i in (range(0, len(favoriteMovies))):
         cursor.execute(f"SELECT COUNT(*) FROM favorite_movies WHERE user_id = ? AND  movie_id = ?",
@@ -115,13 +128,24 @@ def _addFavMoviesToDb(username, password, favoriteMovies):
                         (row_id, user_id, favoriteMovies[i]))
         database.commit()
 
+addfavoriteMovies('Test2', 'test2')
+
 def allUserMovies(name, password, dbTable):
-    cursor.execute(f"SELECT movie_id FROM user LEFT JOIN favorite_movies as fav_mov ON user.id = fav_mov.user_id WHERE name = ? AND password = ?",
-                    (name, password))
+    cursor.execute(f"SELECT movie_id FROM user LEFT JOIN favorite_movies as fav_mov ON user.id = fav_mov.user_id WHERE name = ?",
+                    (name,))
     user = cursor.fetchall()
     if user is None:
         print('user not found, try check if the username or the password is correct')
         return
+    
+    encrptPwd = cursor.execute('SELECT password FROM user WHERE name = ?', (username,))
+    encrptPwd = cursor.fetchone()[0]
+    if cryptpsswrd.uncryptPassword(password, encrptPwd) == True:
+        print('password correct')
+    else:
+        print('password incorrect')
+        return
+    
     moviesTable = []
     if dbTable == 'f':
         for movie_id in user:
@@ -145,15 +169,23 @@ def allUserMovies(name, password, dbTable):
         
     
 def addWachedMovies(username, password):
-    cursor.execute(f"SELECT COUNT(*) FROM user WHERE  name = ? AND  password = ?", (username, password))
+    cursor.execute(f"SELECT COUNT(*) FROM user WHERE  name = ?", (username, ))
     userexistence = cursor.fetchone()[0]
     if userexistence == 0:
         print('user not found')
         return
     
+    encrptPwd = cursor.execute('SELECT password FROM user WHERE name = ?', (username,))
+    encrptPwd = cursor.fetchone()[0]
+    if cryptpsswrd.uncryptPassword(password, encrptPwd) == True:
+        print('password correct')
+    else:
+        print('password incorrect')
+        return
+
     moviesDict = mvs.movies_title()
 
-    cursor.execute(f"SELECT id FROM user WHERE  name = ? AND  password = ?", (username, password))
+    cursor.execute(f"SELECT id FROM user WHERE  name = ? AND  password = ?", (username, cryptpsswrd.encryptPassword(password)))
     user_id = cursor.fetchone()[0]
 
     print(f'Movies: {moviesDict}')
