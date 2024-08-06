@@ -1,3 +1,5 @@
+import sys
+sys.path.append('/home/byshadowoz/Repo/Movies_Data_Visualization/App')
 import sqlite3
 import movies as mvs
 import uuid
@@ -217,8 +219,3 @@ def addWachedMovies(username, password):
             addWachedMovies(username, password)
         else:
             return
-user = input('ingresa usuario:')
-password = input('ingresa contraseña:')
-email = input('ingresa su correo:')
-
-addUser(user, email, password)

@@ -10,6 +10,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 import re
 
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -193,6 +194,7 @@ class Ui_MainWindow(object):
                 else:
                     self.ErrorTextEdit.setPlainText("")
                     return username
+                
         def emailParams(self):
                 validateEmail = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                 emailDirection = self.field_2.text()
@@ -201,6 +203,7 @@ class Ui_MainWindow(object):
                 else:
                     self.ErrorTextEdit_2.setPlainText("")
                     return emailDirection
+                
         def passwordConfirm(self):
                 password = self.field_3.text()
                 confirm = self.field_4.text()
@@ -211,15 +214,13 @@ class Ui_MainWindow(object):
                 else:
                     self.ErrorTextEdit_3.setPlainText("")
                     return password
+                
         username = usernameParams(self)
         email = emailParams(self)
         psswrd = passwordConfirm(self)
-        
-# TODO: FIX THIS 
-        from App.recomendationModel.conection3 import addUser
+        from conection3 import addUser    
         addUser(username, email, psswrd)
-        self.ErrorTextEdit_3.setStyleSheet("color: rgb(51, 209, 122)")
-        self.ErrorTextEdit_3.setPlainText("User Created succesfully!")
+
 
 
 if __name__ == "__main__":
