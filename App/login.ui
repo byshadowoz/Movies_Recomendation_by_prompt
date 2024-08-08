@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>560</width>
-    <height>847</height>
+    <width>1070</width>
+    <height>726</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -44,401 +44,77 @@
     </property>
     <item>
      <widget class="QFrame" name="frame">
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
-      </property>
-      <property name="autoFillBackground">
-       <bool>false</bool>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
       </property>
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <widget class="QTextBrowser" name="textBrowser">
+      <widget class="Line" name="line">
        <property name="geometry">
         <rect>
-         <x>90</x>
-         <y>30</y>
-         <width>401</width>
-         <height>131</height>
+         <x>360</x>
+         <y>110</y>
+         <width>20</width>
+         <height>641</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(97, 53, 131)</string>
+        <string notr="true">background-color: rgb(119, 118, 123);</string>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="textEdit">
+       <property name="geometry">
+        <rect>
+         <x>230</x>
+         <y>20</y>
+         <width>601</width>
+         <height>70</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(48, 25, 99);
+border-color: rgb(255, 255, 255);</string>
        </property>
        <property name="html">
         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:26pt; font-weight:600; color:#241f31;&quot;&gt;Create user &lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:26pt; font-weight:600; color:#241f31;&quot;&gt;or&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:26pt; font-weight:600; color:#241f31;&quot;&gt;Start Sesion&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:36pt; font-weight:600; color:#1a5fb4;&quot;&gt;Movie Database&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
-      <widget class="QFrame" name="Username_field">
+      <widget class="QComboBox" name="comboBox">
        <property name="geometry">
         <rect>
-         <x>40</x>
-         <y>200</y>
-         <width>471</width>
-         <height>91</height>
+         <x>20</x>
+         <y>110</y>
+         <width>171</width>
+         <height>25</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">border: none;</string>
+        <string notr="true">background-color: rgb(154, 153, 150);</string>
        </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-       <widget class="QLineEdit" name="field">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>20</y>
-          <width>451</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(48, 25, 99)</string>
-        </property>
+       <item>
         <property name="text">
-         <string/>
+         <string>Add Favorite Movies</string>
         </property>
-        <property name="placeholderText">
-         <string>Username</string>
-        </property>
-        <property name="clearButtonEnabled">
-         <bool>false</bool>
-        </property>
-       </widget>
-       <widget class="QPlainTextEdit" name="ErrorTextEdit">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>50</y>
-          <width>451</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="acceptDrops">
-         <bool>true</bool>
-        </property>
-        <property name="autoFillBackground">
-         <bool>false</bool>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color: rgb(165, 29, 45);
-font: 75 italic 8pt &quot;Ubuntu&quot;;
-border: none;</string>
-        </property>
-        <property name="lineWidth">
-         <number>0</number>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-        <property name="plainText">
-         <string/>
-        </property>
-        <property name="overwriteMode">
-         <bool>true</bool>
-        </property>
-        <property name="backgroundVisible">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QFrame" name="email_field">
-       <property name="geometry">
-        <rect>
-         <x>40</x>
-         <y>310</y>
-         <width>471</width>
-         <height>91</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border: none;</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-       <widget class="QPlainTextEdit" name="ErrorTextEdit_2">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>50</y>
-          <width>451</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="autoFillBackground">
-         <bool>false</bool>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color: rgb(165, 29, 45);
-font: 75 italic 8pt &quot;Ubuntu&quot;;
-border: none;</string>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-        <property name="plainText">
-         <string/>
-        </property>
-        <property name="overwriteMode">
-         <bool>true</bool>
-        </property>
-        <property name="backgroundVisible">
-         <bool>false</bool>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="field_2">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>20</y>
-          <width>451</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(48, 25, 99);</string>
-        </property>
+       </item>
+       <item>
         <property name="text">
-         <string/>
+         <string>Add WachedMovies</string>
         </property>
-        <property name="placeholderText">
-         <string>Email</string>
-        </property>
-        <property name="clearButtonEnabled">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QFrame" name="psswrd_field">
-       <property name="geometry">
-        <rect>
-         <x>39</x>
-         <y>419</y>
-         <width>471</width>
-         <height>131</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border: none;</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-       <widget class="QLineEdit" name="field_3">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>451</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(48, 25, 99)</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="placeholderText">
-         <string>Password</string>
-        </property>
-        <property name="clearButtonEnabled">
-         <bool>false</bool>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="field_4">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>50</y>
-          <width>451</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(48, 25, 99)</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="placeholderText">
-         <string>Confirm Password</string>
-        </property>
-        <property name="clearButtonEnabled">
-         <bool>false</bool>
-        </property>
-       </widget>
-       <widget class="QPlainTextEdit" name="ErrorTextEdit_3">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>90</y>
-          <width>451</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="autoFillBackground">
-         <bool>false</bool>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color: rgb(165, 29, 45);
-font: 75 italic 8pt &quot;Ubuntu&quot;;
-border: none;</string>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-        <property name="plainText">
-         <string/>
-        </property>
-        <property name="overwriteMode">
-         <bool>true</bool>
-        </property>
-        <property name="backgroundVisible">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QFrame" name="change_create_user">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>550</y>
-         <width>471</width>
-         <height>51</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border: none;</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-       <widget class="QPushButton" name="createbutton">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>191</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(38, 13, 80);</string>
-        </property>
-        <property name="text">
-         <string>Create User.</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="changebutton">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>10</y>
-          <width>171</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(38, 13, 80);</string>
-        </property>
-        <property name="text">
-         <string>Already have a account?</string>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QFrame" name="ad_field">
-       <property name="geometry">
-        <rect>
-         <x>50</x>
-         <y>600</y>
-         <width>451</width>
-         <height>211</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">border: none;</string>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
-       </property>
-       <widget class="QWebView" name="webView">
-        <property name="geometry">
-         <rect>
-          <x>60</x>
-          <y>0</y>
-          <width>361</width>
-          <height>200</height>
-         </rect>
-        </property>
-        <property name="url">
-         <url>
-          <string>about:blank</string>
-         </url>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QLabel" name="label">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>170</y>
-         <width>141</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color:rgb(154, 153, 150);
-font: 75 16pt &quot;Ubuntu&quot;;</string>
-       </property>
-       <property name="text">
-        <string>Create account</string>
-       </property>
+       </item>
       </widget>
      </widget>
     </item>
    </layout>
   </widget>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QWebView</class>
-   <extends>QWidget</extends>
-   <header location="global">QtWebKitWidgets/QWebView</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>
