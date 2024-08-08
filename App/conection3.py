@@ -36,8 +36,6 @@ createTables()
 
 def generate_id():
     return str(uuid.uuid4())
-idx = str(generate_id())
-#create a user
 
 # add user to db
 def addUser(username, email, password):
@@ -46,21 +44,21 @@ def addUser(username, email, password):
     userexistence = cursor.fetchone()[0]
     if userexistence > 0:
         print('email already used')
-        return
+        return False
     
     cursor.execute(f"SELECT COUNT(*) FROM user WHERE name = ?",
                     (username,))
     userexistence = cursor.fetchone()[0]
     if userexistence > 0:
         print('username already used')
-        return
+        return False
     
     
     
     cursor.execute(f"INSERT INTO user (id, name, password, email) VALUES (?, ?, ?, ?)",
-                    (idx, username, cryptpsswrd.encryptPassword(password), email))
+                    (generate_id(), username, cryptpsswrd.encryptPassword(password), email))
     database.commit()
-    print('user created succesful')
+    return True
 
 
 
