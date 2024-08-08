@@ -12,41 +12,142 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1070, 726)
+        MainWindow.resize(1070, 901)
         MainWindow.setStyleSheet("background-color: rgb(36, 31, 49)")
         MainWindow.setDocumentMode(False)
         MainWindow.setUnifiedTitleAndToolBarOnMac(False)
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
         self.centralwidget.setMouseTracking(True)
+        self.centralwidget.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
         self.centralwidget.setObjectName("centralwidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout.setSpacing(0)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.frame = QtWidgets.QFrame(parent=self.centralwidget)
-        self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame.setObjectName("frame")
-        self.line = QtWidgets.QFrame(parent=self.frame)
-        self.line.setGeometry(QtCore.QRect(360, 110, 20, 641))
-        self.line.setStyleSheet("background-color: rgb(119, 118, 123);")
+        self.frame_2 = QtWidgets.QFrame(parent=self.centralwidget)
+        self.frame_2.setGeometry(QtCore.QRect(0, 520, 351, 231))
+        self.frame_2.setStyleSheet("border: None\n"
+"")
+        self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_2.setObjectName("frame_2")
+        self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.frame_2)
+        self.verticalLayout_8.setObjectName("verticalLayout_8")
+        self.selectTable_3 = QtWidgets.QComboBox(parent=self.frame_2)
+        self.selectTable_3.setStyleSheet("background-color: rgb(154, 153, 150);\n"
+"color: rgb(36, 31, 49);")
+        self.selectTable_3.setObjectName("selectTable_3")
+        self.selectTable_3.addItem("")
+        self.selectTable_3.addItem("")
+        self.verticalLayout_8.addWidget(self.selectTable_3)
+        self.movieName_field_3 = QtWidgets.QPlainTextEdit(parent=self.frame_2)
+        self.movieName_field_3.setStyleSheet("background-color: rgb(97, 53, 131);\n"
+"")
+        self.movieName_field_3.setObjectName("movieName_field_3")
+        self.verticalLayout_8.addWidget(self.movieName_field_3)
+        self.Error_from_mnField_3 = QtWidgets.QPlainTextEdit(parent=self.frame_2)
+        self.Error_from_mnField_3.setStyleSheet("color: rgb(165, 29, 45);\n"
+"border: None\n"
+"")
+        self.Error_from_mnField_3.setPlainText("")
+        self.Error_from_mnField_3.setObjectName("Error_from_mnField_3")
+        self.verticalLayout_8.addWidget(self.Error_from_mnField_3)
+        self.rating_field_3 = QtWidgets.QPlainTextEdit(parent=self.frame_2)
+        self.rating_field_3.setStyleSheet("background-color: rgb(97, 53, 131);\n"
+"")
+        self.rating_field_3.setObjectName("rating_field_3")
+        self.verticalLayout_8.addWidget(self.rating_field_3)
+        self.Error_from_rField_3 = QtWidgets.QPlainTextEdit(parent=self.frame_2)
+        self.Error_from_rField_3.setStyleSheet("color: rgb(165, 29, 45);\n"
+"border: None\n"
+"")
+        self.Error_from_rField_3.setPlainText("")
+        self.Error_from_rField_3.setObjectName("Error_from_rField_3")
+        self.verticalLayout_8.addWidget(self.Error_from_rField_3)
+        self.addMovieButton_3 = QtWidgets.QPushButton(parent=self.frame_2)
+        self.addMovieButton_3.setStyleSheet("background-color: rgb(61, 56, 70);")
+        self.addMovieButton_3.setObjectName("addMovieButton_3")
+        self.verticalLayout_8.addWidget(self.addMovieButton_3)
+        self.recomendMovieButton_3 = QtWidgets.QPushButton(parent=self.frame_2)
+        self.recomendMovieButton_3.setStyleSheet("background-color: rgb(26, 95, 180)")
+        self.recomendMovieButton_3.setObjectName("recomendMovieButton_3")
+        self.verticalLayout_8.addWidget(self.recomendMovieButton_3)
+        self.MovieDatabase_title = QtWidgets.QTextEdit(parent=self.centralwidget)
+        self.MovieDatabase_title.setGeometry(QtCore.QRect(220, 0, 601, 70))
+        self.MovieDatabase_title.setStyleSheet("background-color: rgb(48, 25, 99);\n"
+"border-color: rgb(255, 255, 255);")
+        self.MovieDatabase_title.setReadOnly(True)
+        self.MovieDatabase_title.setObjectName("MovieDatabase_title")
+        self.line = QtWidgets.QFrame(parent=self.centralwidget)
+        self.line.setGeometry(QtCore.QRect(350, 90, 20, 771))
+        self.line.setStyleSheet("background-color: rgb(36, 31, 49);")
         self.line.setFrameShape(QtWidgets.QFrame.Shape.VLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line.setObjectName("line")
-        self.textEdit = QtWidgets.QTextEdit(parent=self.frame)
-        self.textEdit.setGeometry(QtCore.QRect(230, 20, 601, 70))
-        self.textEdit.setStyleSheet("background-color: rgb(48, 25, 99);\n"
+        self.database_Frame = QtWidgets.QFrame(parent=self.centralwidget)
+        self.database_Frame.setGeometry(QtCore.QRect(370, 80, 701, 761))
+        self.database_Frame.setStyleSheet("border: None;")
+        self.database_Frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.database_Frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.database_Frame.setObjectName("database_Frame")
+        self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.database_Frame)
+        self.verticalLayout_10.setObjectName("verticalLayout_10")
+        self.movieData_frame_3 = QtWidgets.QFrame(parent=self.database_Frame)
+        self.movieData_frame_3.setStyleSheet("border:")
+        self.movieData_frame_3.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.movieData_frame_3.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.movieData_frame_3.setObjectName("movieData_frame_3")
+        self.movie_title_3 = QtWidgets.QPlainTextEdit(parent=self.movieData_frame_3)
+        self.movie_title_3.setGeometry(QtCore.QRect(10, 10, 591, 31))
+        self.movie_title_3.setStyleSheet("background-color: rgb(61, 56, 70);")
+        self.movie_title_3.setReadOnly(True)
+        self.movie_title_3.setObjectName("movie_title_3")
+        self.movie_detail1_3 = QtWidgets.QPlainTextEdit(parent=self.movieData_frame_3)
+        self.movie_detail1_3.setGeometry(QtCore.QRect(10, 50, 421, 31))
+        self.movie_detail1_3.setStyleSheet("background-color: rgb(61, 56, 70);")
+        self.movie_detail1_3.setReadOnly(True)
+        self.movie_detail1_3.setObjectName("movie_detail1_3")
+        self.movie_detail2_3 = QtWidgets.QPlainTextEdit(parent=self.movieData_frame_3)
+        self.movie_detail2_3.setGeometry(QtCore.QRect(10, 90, 421, 31))
+        self.movie_detail2_3.setStyleSheet("background-color: rgb(61, 56, 70);")
+        self.movie_detail2_3.setReadOnly(True)
+        self.movie_detail2_3.setObjectName("movie_detail2_3")
+        self.moreDetails_button_3 = QtWidgets.QPushButton(parent=self.movieData_frame_3)
+        self.moreDetails_button_3.setGeometry(QtCore.QRect(480, 100, 101, 25))
+        self.moreDetails_button_3.setStyleSheet("background-color: rgb(119, 118, 123);")
+        self.moreDetails_button_3.setObjectName("moreDetails_button_3")
+        self.verticalLayout_10.addWidget(self.movieData_frame_3)
+        self.signupFrame_3 = QtWidgets.QFrame(parent=self.centralwidget)
+        self.signupFrame_3.setGeometry(QtCore.QRect(20, 80, 333, 313))
+        self.signupFrame_3.setStyleSheet("border: None\n"
+"")
+        self.signupFrame_3.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.signupFrame_3.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.signupFrame_3.setObjectName("signupFrame_3")
+        self.signupTitle_3 = QtWidgets.QTextEdit(parent=self.signupFrame_3)
+        self.signupTitle_3.setGeometry(QtCore.QRect(110, 10, 141, 41))
+        self.signupTitle_3.setStyleSheet("background-color: rgb(48, 25, 99);\n"
 "border-color: rgb(255, 255, 255);")
-        self.textEdit.setReadOnly(True)
-        self.textEdit.setObjectName("textEdit")
-        self.comboBox = QtWidgets.QComboBox(parent=self.frame)
-        self.comboBox.setGeometry(QtCore.QRect(20, 110, 171, 25))
-        self.comboBox.setStyleSheet("background-color: rgb(154, 153, 150);\n"
-"color: rgb(36, 31, 49);")
-        self.comboBox.setObjectName("comboBox")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.verticalLayout.addWidget(self.frame)
+        self.signupTitle_3.setReadOnly(True)
+        self.signupTitle_3.setObjectName("signupTitle_3")
+        self.username_field_3 = QtWidgets.QPlainTextEdit(parent=self.signupFrame_3)
+        self.username_field_3.setGeometry(QtCore.QRect(10, 70, 231, 31))
+        self.username_field_3.setStyleSheet("background-color: rgb(97, 53, 131);\n"
+"")
+        self.username_field_3.setObjectName("username_field_3")
+        self.password_field_3 = QtWidgets.QPlainTextEdit(parent=self.signupFrame_3)
+        self.password_field_3.setGeometry(QtCore.QRect(10, 120, 231, 31))
+        self.password_field_3.setStyleSheet("background-color: rgb(97, 53, 131);\n"
+"")
+        self.password_field_3.setObjectName("password_field_3")
+        self.error_user_3 = QtWidgets.QPlainTextEdit(parent=self.signupFrame_3)
+        self.error_user_3.setGeometry(QtCore.QRect(10, 160, 171, 71))
+        self.error_user_3.setStyleSheet("color: rgb(165, 29, 45);\n"
+"border: None\n"
+"")
+        self.error_user_3.setPlainText("")
+        self.error_user_3.setObjectName("error_user_3")
+        self.signupbutton_3 = QtWidgets.QPushButton(parent=self.signupFrame_3)
+        self.signupbutton_3.setGeometry(QtCore.QRect(230, 190, 101, 31))
+        self.signupbutton_3.setStyleSheet("background-color:rgb(61, 56, 70)")
+        self.signupbutton_3.setObjectName("signupbutton_3")
+        self.signupbutton_3.clicked.connect(self.replace_signUp_frame)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -55,14 +156,62 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.textEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.selectTable_3.setItemText(0, _translate("MainWindow", "WachedMovies"))
+        self.selectTable_3.setItemText(1, _translate("MainWindow", "Favorite Movies"))
+        self.movieName_field_3.setPlaceholderText(_translate("MainWindow", "Movie Name"))
+        self.rating_field_3.setPlaceholderText(_translate("MainWindow", "Rating"))
+        self.addMovieButton_3.setText(_translate("MainWindow", "Add Movie"))
+        self.recomendMovieButton_3.setText(_translate("MainWindow", "Recomend Movies"))
+        self.MovieDatabase_title.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:36pt; font-weight:600; color:#1a5fb4;\">Movie Database</span></p></body></html>"))
-        self.comboBox.setItemText(0, _translate("MainWindow", "Add WachedMovies"))
-        self.comboBox.setItemText(1, _translate("MainWindow", "Add Favorite Movies"))
+        self.moreDetails_button_3.setText(_translate("MainWindow", "Movie Details"))
+        self.signupTitle_3.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:18pt; font-weight:600; font-style:italic; color:#33d17a;\">Sign-Up</span></p></body></html>"))
+        self.username_field_3.setPlaceholderText(_translate("MainWindow", "Username"))
+        self.password_field_3.setPlaceholderText(_translate("MainWindow", "Password"))
+        self.signupbutton_3.setText(_translate("MainWindow", "Sign-Up"))
 
+    def replace_signUp_frame(self):
+
+        if hasattr(self, 'signupFrame_3') and self.signupFrame_3 is not None:
+                self.verticalLayout_8.removeWidget(self.signupFrame_3)
+                self.signupFrame_3.deleteLater()
+                self.signupFrame_3 = None
+
+
+        self.signup2_Frame = QtWidgets.QFrame(parent=self.centralwidget)
+        self.signup2_Frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.signup2_Frame.setGeometry(QtCore.QRect(20, 80, 333, 313))
+        self.signup2_Frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.signup2_Frame.setObjectName("signup2_Frame")
+
+        self.signupTitle_2 = QtWidgets.QTextEdit(parent=self.signup2_Frame)
+        self.signupTitle_2.setGeometry(QtCore.QRect(60, 10, 241, 31))
+        self.signupTitle_2.setStyleSheet("background-color: rgb(48, 25, 99);\nborder-color: rgb(255, 255, 255);")
+        self.signupTitle_2.setReadOnly(True)
+        self.signupTitle_2.setObjectName("signupTitle_2")
+
+        self.email_3 = QtWidgets.QTextEdit(parent=self.signup2_Frame)
+        self.email_3.setGeometry(QtCore.QRect(20, 120, 241, 31))
+        self.email_3.setStyleSheet("background-color: rgb(48, 25, 99);\nborder-color: rgb(255, 255, 255);")
+        self.email_3.setReadOnly(True)
+        self.email_3.setObjectName("email_3")
+
+        self.userTitle_4 = QtWidgets.QTextEdit(parent=self.signup2_Frame)
+        self.userTitle_4.setGeometry(QtCore.QRect(20, 70, 241, 31))
+        self.userTitle_4.setStyleSheet("background-color: rgb(48, 25, 99);\nborder-color: rgb(255, 255, 255);")
+        self.userTitle_4.setReadOnly(True)
+        self.userTitle_4.setObjectName("userTitle_4")
+
+        self.verticalLayout_8.addWidget(self.signup2_Frame)
+
+        self.signup2_Frame.show()
 
 if __name__ == "__main__":
     import sys
