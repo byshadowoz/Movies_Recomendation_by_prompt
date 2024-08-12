@@ -7,12 +7,15 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-
+import sqlite3
+import cryptpsswrd as crypp
+database = sqlite3.connect('database/usersAndMovies')
+cursor = database.cursor()
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1070, 901)
+        MainWindow.resize(1090, 807)
         MainWindow.setStyleSheet("background-color: rgb(36, 31, 49)")
         MainWindow.setDocumentMode(False)
         MainWindow.setUnifiedTitleAndToolBarOnMac(False)
@@ -113,41 +116,69 @@ class Ui_MainWindow(object):
         self.moreDetails_button_3.setStyleSheet("background-color: rgb(119, 118, 123);")
         self.moreDetails_button_3.setObjectName("moreDetails_button_3")
         self.verticalLayout_10.addWidget(self.movieData_frame_3)
+        self.signupFrame_4 = QtWidgets.QFrame(parent=self.centralwidget)
+        self.signupFrame_4.setGeometry(QtCore.QRect(10, 80, 331, 151))
+        self.signupFrame_4.setStyleSheet("border: None\n"
+"")
+        self.signupFrame_4.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.signupFrame_4.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.signupFrame_4.setObjectName("signupFrame_4")
+        self.signupTitle_4 = QtWidgets.QTextEdit(parent=self.signupFrame_4)
+        self.signupTitle_4.setGeometry(QtCore.QRect(9, 9, 313, 41))
+        self.signupTitle_4.setStyleSheet("background-color: rgb(48, 25, 99);\n"
+"border-color: rgb(255, 255, 255);")
+        self.signupTitle_4.setReadOnly(True)
+        self.signupTitle_4.setObjectName("signupTitle_4")
+        self.username_field_4 = QtWidgets.QPlainTextEdit(parent=self.signupFrame_4)
+        self.username_field_4.setGeometry(QtCore.QRect(9, 56, 313, 40))
+        self.username_field_4.setStyleSheet("background-color: rgb(97, 53, 131);\n"
+"")
+        self.username_field_4.setReadOnly(True)
+        self.username_field_4.setObjectName("username_field_4")
+        self.email_field_4 = QtWidgets.QPlainTextEdit(parent=self.signupFrame_4)
+        self.email_field_4.setGeometry(QtCore.QRect(9, 102, 313, 40))
+        self.email_field_4.setStyleSheet("background-color: rgb(97, 53, 131);\n"
+"")
+        self.email_field_4.setReadOnly(True)
+        self.email_field_4.setObjectName("email_field_4")
         self.signupFrame_3 = QtWidgets.QFrame(parent=self.centralwidget)
-        self.signupFrame_3.setGeometry(QtCore.QRect(20, 80, 333, 313))
+        self.signupFrame_3.setGeometry(QtCore.QRect(10, 80, 341, 221))
         self.signupFrame_3.setStyleSheet("border: None\n"
 "")
         self.signupFrame_3.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.signupFrame_3.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.signupFrame_3.setObjectName("signupFrame_3")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.signupFrame_3)
+        self.verticalLayout.setObjectName("verticalLayout")
         self.signupTitle_3 = QtWidgets.QTextEdit(parent=self.signupFrame_3)
-        self.signupTitle_3.setGeometry(QtCore.QRect(110, 10, 141, 41))
         self.signupTitle_3.setStyleSheet("background-color: rgb(48, 25, 99);\n"
 "border-color: rgb(255, 255, 255);")
         self.signupTitle_3.setReadOnly(True)
         self.signupTitle_3.setObjectName("signupTitle_3")
+        self.verticalLayout.addWidget(self.signupTitle_3)
         self.username_field_3 = QtWidgets.QPlainTextEdit(parent=self.signupFrame_3)
-        self.username_field_3.setGeometry(QtCore.QRect(10, 70, 231, 31))
         self.username_field_3.setStyleSheet("background-color: rgb(97, 53, 131);\n"
 "")
         self.username_field_3.setObjectName("username_field_3")
+        self.verticalLayout.addWidget(self.username_field_3)
         self.password_field_3 = QtWidgets.QPlainTextEdit(parent=self.signupFrame_3)
-        self.password_field_3.setGeometry(QtCore.QRect(10, 120, 231, 31))
         self.password_field_3.setStyleSheet("background-color: rgb(97, 53, 131);\n"
 "")
         self.password_field_3.setObjectName("password_field_3")
+        self.verticalLayout.addWidget(self.password_field_3)
         self.error_user_3 = QtWidgets.QPlainTextEdit(parent=self.signupFrame_3)
-        self.error_user_3.setGeometry(QtCore.QRect(10, 160, 171, 71))
         self.error_user_3.setStyleSheet("color: rgb(165, 29, 45);\n"
 "border: None\n"
-"")
+"")     
+        self.error_user_3.setReadOnly(True)
         self.error_user_3.setPlainText("")
         self.error_user_3.setObjectName("error_user_3")
+        self.verticalLayout.addWidget(self.error_user_3)
         self.signupbutton_3 = QtWidgets.QPushButton(parent=self.signupFrame_3)
-        self.signupbutton_3.setGeometry(QtCore.QRect(230, 190, 101, 31))
         self.signupbutton_3.setStyleSheet("background-color:rgb(61, 56, 70)")
         self.signupbutton_3.setObjectName("signupbutton_3")
-        self.signupbutton_3.clicked.connect(self.replace_signUp_frame)
+        self.signupbutton_3.clicked.connect(self.check_login)
+        self.verticalLayout.addWidget(self.signupbutton_3)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -168,50 +199,47 @@ class Ui_MainWindow(object):
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:36pt; font-weight:600; color:#1a5fb4;\">Movie Database</span></p></body></html>"))
         self.moreDetails_button_3.setText(_translate("MainWindow", "Movie Details"))
+        self.signupTitle_4.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; color:#ffffff;\">Account</span></p></body></html>"))
+        self.username_field_4.setPlaceholderText(_translate("MainWindow", "Username"))
+        self.email_field_4.setPlaceholderText(_translate("MainWindow", "email"))
         self.signupTitle_3.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:18pt; font-weight:600; font-style:italic; color:#33d17a;\">Sign-Up</span></p></body></html>"))
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; font-weight:600; color:#33d17a;\">Log-In</span></p></body></html>"))
         self.username_field_3.setPlaceholderText(_translate("MainWindow", "Username"))
         self.password_field_3.setPlaceholderText(_translate("MainWindow", "Password"))
-        self.signupbutton_3.setText(_translate("MainWindow", "Sign-Up"))
+        self.signupbutton_3.setText(_translate("MainWindow", "Log-in"))
 
-    def replace_signUp_frame(self):
-
-        if hasattr(self, 'signupFrame_3') and self.signupFrame_3 is not None:
-                self.verticalLayout_8.removeWidget(self.signupFrame_3)
-                self.signupFrame_3.deleteLater()
-                self.signupFrame_3 = None
-
-
-        self.signup2_Frame = QtWidgets.QFrame(parent=self.centralwidget)
-        self.signup2_Frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.signup2_Frame.setGeometry(QtCore.QRect(20, 80, 333, 313))
-        self.signup2_Frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.signup2_Frame.setObjectName("signup2_Frame")
-
-        self.signupTitle_2 = QtWidgets.QTextEdit(parent=self.signup2_Frame)
-        self.signupTitle_2.setGeometry(QtCore.QRect(60, 10, 241, 31))
-        self.signupTitle_2.setStyleSheet("background-color: rgb(48, 25, 99);\nborder-color: rgb(255, 255, 255);")
-        self.signupTitle_2.setReadOnly(True)
-        self.signupTitle_2.setObjectName("signupTitle_2")
-
-        self.email_3 = QtWidgets.QTextEdit(parent=self.signup2_Frame)
-        self.email_3.setGeometry(QtCore.QRect(20, 120, 241, 31))
-        self.email_3.setStyleSheet("background-color: rgb(48, 25, 99);\nborder-color: rgb(255, 255, 255);")
-        self.email_3.setReadOnly(True)
-        self.email_3.setObjectName("email_3")
-
-        self.userTitle_4 = QtWidgets.QTextEdit(parent=self.signup2_Frame)
-        self.userTitle_4.setGeometry(QtCore.QRect(20, 70, 241, 31))
-        self.userTitle_4.setStyleSheet("background-color: rgb(48, 25, 99);\nborder-color: rgb(255, 255, 255);")
-        self.userTitle_4.setReadOnly(True)
-        self.userTitle_4.setObjectName("userTitle_4")
-
-        self.verticalLayout_8.addWidget(self.signup2_Frame)
-
-        self.signup2_Frame.show()
+    def check_login(self):
+                try:
+                        username = self.username_field_3.toPlainText()
+                        password = self.password_field_3.toPlainText()
+                        if username == "" or password == "":
+                                self.error_user_3.setPlainText("Please fill in all fields")
+                                return False
+                        
+                        def replace_login_frame(self):
+                                self.verticalLayout_8.removeWidget(self.signupFrame_3)
+                                self.signupFrame_3.deleteLater()
+                                self.signupFrame_3 = None
+                        
+                        if crypp.checkPassword(password, username) == True:
+                                cursor.execute(f'SELECT email FROM user WHERE name = ?', (username, ))
+                                email = cursor.fetchone()[0]
+                                self.error_user_3.setPlainText("")
+                                replace_login_frame(self)
+                                self.username_field_4.setPlainText(username)
+                                self.email_field_4.setPlainText(email)
+                        else:
+                               self.error_user_3.setPlainText("Incorrect username or password")
+                except Exception as e:
+                      print(e)
+                                        
 
 if __name__ == "__main__":
     import sys

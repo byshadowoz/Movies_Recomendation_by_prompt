@@ -1,4 +1,5 @@
 import bcrypt
+
 def encryptPassword(password):
     pwd = password.encode('utf-8')
     sal = bcrypt.gensalt()
@@ -7,3 +8,14 @@ def encryptPassword(password):
 
 def uncryptPassword(Password, hash):
     return bcrypt.checkpw(Password.encode('utf-8'), hash)
+
+def checkPassword(password, username):
+    import sqlite3
+    database = sqlite3.connect('database/usersAndMovies')
+    cursor = database.cursor()
+    cursor.execute(f'SELECT password FROM user WHERE name = ?', (username, ))
+    hashs = cursor.fetchone()[0]
+    if uncryptPassword(password, hashs) == True:
+        return True
+    else:
+        return False

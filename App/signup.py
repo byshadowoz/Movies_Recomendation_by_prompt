@@ -142,11 +142,6 @@ class Ui_MainWindow(object):
         self.createbutton.setObjectName("createbutton")
         self.createbutton.clicked.connect(self.create_account)
 
-        self.changebutton = QtWidgets.QPushButton(parent=self.change_create_user)
-        self.changebutton.setGeometry(QtCore.QRect(260, 10, 171, 25))
-        self.changebutton.setStyleSheet("background-color: rgb(38, 13, 80);")
-        self.changebutton.setObjectName("changebutton")
-
         self.ad_field = QtWidgets.QFrame(parent=self.frame)
         self.ad_field.setGeometry(QtCore.QRect(50, 600, 451, 211))
         self.ad_field.setStyleSheet("border: none;")
@@ -181,7 +176,6 @@ class Ui_MainWindow(object):
         self.field_3.setPlaceholderText(_translate("MainWindow", "Password"))
         self.field_4.setPlaceholderText(_translate("MainWindow", "Confirm Password"))
         self.createbutton.setText(_translate("MainWindow", "Create User."))
-        self.changebutton.setText(_translate("MainWindow", "Already have a account?"))
         self.label.setText(_translate("MainWindow", "Create account"))
     
     def create_account(self):
