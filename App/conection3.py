@@ -8,7 +8,7 @@ from model import modelRecomV1 as ml
 import cryptpsswrd
 
 #create the database
-database = sqlite3.connect('database/usersAndMovies')
+database = sqlite3.connect('database/usersAndMovie')
 cursor = database.cursor()
 
 def createTables():

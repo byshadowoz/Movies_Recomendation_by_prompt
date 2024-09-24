@@ -11,7 +11,7 @@ def uncryptPassword(Password, hash):
 
 def checkPassword(password, username):
     import sqlite3
-    database = sqlite3.connect('database/usersAndMovies')
+    database = sqlite3.connect('database/usersAndMovie')
     cursor = database.cursor()
     cursor.execute(f'SELECT password FROM user WHERE name = ?', (username, ))
     hashs = cursor.fetchone()[0]

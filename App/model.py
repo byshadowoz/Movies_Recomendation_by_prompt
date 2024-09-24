@@ -6,7 +6,7 @@ csv_path = 'allmovies.csv'
 dataM = pd.read_csv(csv_path,)
 dataM.drop(columns='genre_ids', inplace=True)
 
-database = sqlite3.connect('database/usersAndMovies')
+database = sqlite3.connect('database/usersAndMovie')
 cursor = database.cursor()
 
 url = "https://api.themoviedb.org/3/genre/movie/list?language=en"

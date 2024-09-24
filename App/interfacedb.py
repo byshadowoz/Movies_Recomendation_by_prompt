@@ -9,8 +9,9 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 import sqlite3
 import cryptpsswrd as crypp
-database = sqlite3.connect('database/usersAndMovies')
+database = sqlite3.connect('database/usersAndMovie')
 cursor = database.cursor()
+username, password = None, None
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -36,8 +37,9 @@ class Ui_MainWindow(object):
         self.selectTable_3.setStyleSheet("background-color: rgb(154, 153, 150);\n"
 "color: rgb(36, 31, 49);")
         self.selectTable_3.setObjectName("selectTable_3")
-        self.selectTable_3.addItem("")
-        self.selectTable_3.addItem("")
+        self.selectTable_3.addItem("Add to Favorite Movies")
+        self.selectTable_3.addItem("Add to Wached Movies")
+        self.selectTable_3.currentIndexChanged.connect(self.combobox_changed)
         self.verticalLayout_8.addWidget(self.selectTable_3)
         self.movieName_field_3 = QtWidgets.QPlainTextEdit(parent=self.frame_2)
         self.movieName_field_3.setStyleSheet("background-color: rgb(97, 53, 131);\n"
@@ -50,6 +52,7 @@ class Ui_MainWindow(object):
 "")
         self.Error_from_mnField_3.setPlainText("")
         self.Error_from_mnField_3.setObjectName("Error_from_mnField_3")
+        self.Error_from_mnField_3.setReadOnly(True)
         self.verticalLayout_8.addWidget(self.Error_from_mnField_3)
         self.rating_field_3 = QtWidgets.QPlainTextEdit(parent=self.frame_2)
         self.rating_field_3.setStyleSheet("background-color: rgb(97, 53, 131);\n"
@@ -61,6 +64,7 @@ class Ui_MainWindow(object):
 "border: None\n"
 "")
         self.Error_from_rField_3.setPlainText("")
+        self.Error_from_rField_3.setReadOnly(True)
         self.Error_from_rField_3.setObjectName("Error_from_rField_3")
         self.verticalLayout_8.addWidget(self.Error_from_rField_3)
         self.addMovieButton_3 = QtWidgets.QPushButton(parent=self.frame_2)
@@ -214,9 +218,9 @@ class Ui_MainWindow(object):
         self.username_field_3.setPlaceholderText(_translate("MainWindow", "Username"))
         self.password_field_3.setPlaceholderText(_translate("MainWindow", "Password"))
         self.signupbutton_3.setText(_translate("MainWindow", "Log-in"))
-
     def check_login(self):
-                try:
+                try:    
+                        global username, password
                         username = self.username_field_3.toPlainText()
                         password = self.password_field_3.toPlainText()
                         if username == "" or password == "":
@@ -235,11 +239,21 @@ class Ui_MainWindow(object):
                                 replace_login_frame(self)
                                 self.username_field_4.setPlainText(username)
                                 self.email_field_4.setPlainText(email)
+                                return username, password
                         else:
                                self.error_user_3.setPlainText("Incorrect username or password")
-                except Exception as e:
-                      print(e)
-                                        
+                except TypeError as e:
+                      if 'NoneType' in str(e) and 'object is not subscriptable' in str(e):
+                             self.error_user_3.setPlainText("please make sure that fields dont have blank spaces")
+
+    def combobox_changed(self, index):
+        if index == 1:
+                self.rating_field_3.hide()
+                self.Error_from_rField_3.hide()
+        elif index == 0:
+                self.rating_field_3.show()
+                self.Error_from_rField_3.show()
+
 
 if __name__ == "__main__":
     import sys
