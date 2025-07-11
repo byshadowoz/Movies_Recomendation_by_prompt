@@ -1,5 +1,40 @@
-# Movies_Data_Visualization
- this repository is about Movie Data and how to visualize the more important things about it
- 
-DATA FROM: https://www.kaggle.com/datasets/asaniczka/tmdb-movies-dataset-2023-930k-movies/data
-AND: https://www.themoviedb.org
+# Movie_Recomentation_by_prompt
+***
+This is ML Engineering project
+***
+## Movie Recomendation by prompt is a experimental project where the user can write a prompt about something and the Program will return a list of movies based on his plot
+
+***
+**App:** Where the ML Engineering project is
+
+**Docker:** Docker Instalation components
+
+**dockerfile:** Instalation guie in Docs folder
+***
+***
+## Steps to Instalation
+***
+
+### Step 1 (Clone repo):
+
+**Copy this repository**
+```bash
+git clone https://github.com/byshadowoz/Movies_Recomendation_by_prompt
+```
+
+***
+### Step 2 (Docker):
+
+for a better and easy experience please install **Docker** at [Docker installation](https://docs.docker.com/engine/install/).
+
+Then please follow the **instalation documentation of docker** in the **Docs** file
+Once installed follow the next step.
+***
+
+### Step 3 (Execute):
+
+Go to App Folder and execute
+
+```bash
+Python main.py 
+```

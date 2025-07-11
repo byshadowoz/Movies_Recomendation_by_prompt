@@ -1,8 +1,6 @@
-archive.zip
-movie_dataset.csv
-recomendationModel/proofs.ipynb
 .env
-__pychache__
-CSVs
- 
-recomendationModel/example.csv
+*__pychache__
+*__init__.py
+/venv
+
+
