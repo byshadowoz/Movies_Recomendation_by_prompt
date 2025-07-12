@@ -31,7 +31,13 @@ Then please follow the **instalation documentation of docker** in the **Docs** f
 Once installed follow the next step.
 ***
 
-### Step 3 (Execute):
+### Step 3 (API):
+
+Go to [OMDB](https://www.omdbapi.com/)
+Log in and create a new API KEY
+Replace the **api_key** in **movie_client.py** 
+
+### Step 4 (Execute):
 
 Go to App Folder and execute
 
