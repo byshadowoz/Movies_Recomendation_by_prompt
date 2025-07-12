@@ -24,4 +24,4 @@ COPY ./App/ .
 EXPOSE 8080
 
 # Command to run the application
-CMD ["python", "main.py"]
+CMD ["streamlit", "run", "main.py"]
