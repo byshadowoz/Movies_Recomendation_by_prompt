@@ -27,6 +27,7 @@ def main():
             else:
                 st.success(f"Found {len(results)} results:")
                 for i, movie in enumerate(results, 1):
+                    st.image(f"{MovieClient().get_movie_poster(movie['imdbID'])}", caption="Sunrise by the mountains")
                     st.write(f"{i}. {movie['Title']} ({movie.get('Year', '?')})")
                     st.write(f"   ⭐ Type: {movie.get('Type', 'N/A')} | 📊 Relevance: {movie['semantic_score']:.2f}")
                     
