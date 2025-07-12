@@ -38,7 +38,7 @@ class MovieClient:
     def get_movie_details(self, imdb_id):
 
         try:
-            response = requests.get(str(self.url) + f"i={imdb_id}{self.api_key}&type=movie")
+            response = requests.get(str(self.url) + f"{self.api_key}&i={imdb_id}&type=movie")
             response.raise_for_status()
             return response.json()
         except requests.exceptions.RequestException as e:
@@ -56,5 +56,5 @@ class MovieClient:
 
 if __name__ == "__main__":
 
-    print(MovieClient().get_movie_data('Inception'))  # Example IMDb ID for "The Shawshank Redemption"
+    print(MovieClient().get_movie_poster('tt0120738'))
 
