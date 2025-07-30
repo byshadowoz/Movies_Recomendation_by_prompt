@@ -42,5 +42,5 @@ Replace the **api_key** in **movie_client.py**
 Go to App Folder and execute
 
 ```bash
-docker run it <image:tag> 
+docker run -it <image:tag> 
 ```
