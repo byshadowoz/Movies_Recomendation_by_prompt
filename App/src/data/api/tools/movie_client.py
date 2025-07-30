@@ -4,16 +4,7 @@ import requests
 from dotenv import load_dotenv
 from pathlib import Path
 
-
-BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent.parent
-
-
-
-env_path = BASE_DIR / '.env'
-load_dotenv(dotenv_path=env_path)
-
-
-
+load_dotenv()
 
 class MovieClient:
     def __init__(self):
@@ -36,9 +27,8 @@ class MovieClient:
             
 
     def get_movie_details(self, imdb_id):
-
         try:
-            response = requests.get(str(self.url) + f"{self.api_key}&i={imdb_id}&type=movie")
+            response = requests.get(str(self.url) + f"{self.api_key}&i={imdb_id}&plot=full&type=movie")
             response.raise_for_status()
             return response.json()
         except requests.exceptions.RequestException as e:
@@ -52,9 +42,3 @@ class MovieClient:
             return poster["Poster"]
         else:
             return "https://via.placeholder.com/300x450.png?text=No+Poster+Available"
-
-
-if __name__ == "__main__":
-
-    print(MovieClient().get_movie_poster('tt0120738'))
-
