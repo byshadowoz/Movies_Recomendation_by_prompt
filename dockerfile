@@ -9,13 +9,9 @@ COPY ./App/requirements.txt .
 # Install the dependencies
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
-RUN pip install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1.tar.gz
+RUN pip install python-dotenv
 
-
-# Copy the environment variables file
-COPY .env /App/.env
-
-RUN ls -la /App/.env && cat /App/.env
+RUN python -m spacy download en_core_web_sm
 
 # Copy the rest of the application code
 COPY ./App/ .

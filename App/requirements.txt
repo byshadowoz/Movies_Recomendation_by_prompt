@@ -1,10 +1,65 @@
-streamlit==1.46.0
-requests==2.28.2
-SQLAlchemy==2.0.20
-pandas==1.5.3
-numpy==1.24.2
-dotenv==0.9.9
-spacy==3.7.0
-scikit-learn==1.2.0
-thinc==8.2.3
-h5py==3.14.0
+# Core web framework
+streamlit==1.39.0
+
+# HTTP requests
+requests==2.32.3
+
+# Environment variables
+python-dotenv==1.0.1
+
+# Natural Language Processing
+spacy==3.7.6
+sentence-transformers==3.3.1
+
+# Machine Learning and Data Science
+scikit-learn==1.5.2
+numpy==1.26.4
+pandas==2.2.3
+
+# Deep Learning (required by sentence-transformers)
+torch==2.5.1
+torchvision==0.20.1
+transformers==4.46.3
+
+# Additional ML/AI dependencies
+huggingface-hub==0.26.5
+tokenizers==0.20.4
+safetensors==0.4.5
+
+# Utilities and support libraries
+click==8.1.7
+jinja2==3.1.4
+markupsafe==3.0.2
+blinker==1.9.0
+cachetools==5.5.0
+charset-normalizer==3.4.0
+idna==3.10
+urllib3==2.2.3
+certifi==2024.8.30
+
+# Image processing (for Streamlit image display)
+Pillow==10.4.0
+
+# Data handling
+pytz==2024.2
+python-dateutil==2.9.0.post0
+six==1.16.0
+
+# File handling
+fsspec==2024.10.0
+filelock==3.16.1
+
+# JSON schema validation
+jsonschema==4.23.0
+jsonschema-specifications==2024.10.1
+
+# Markdown support
+markdown-it-py==3.0.0
+mdurl==0.1.2
+
+# Progress bars and CLI
+tqdm==4.67.1
+typing-extensions==4.12.2
+
+# Parallel processing
+joblib==1.4.2
